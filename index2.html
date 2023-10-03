@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Task Two</title>
-    <link rel="stylesheet" href="../../asets/css/bootstrap.css">
+    <link rel="stylesheet" href="asets/css/bootstrap.css">
 </head>
 <body>
 
@@ -24,30 +24,41 @@
     </div>
 </section>
 
-
 <script>
-
     let startBtn=document.querySelector("#btnStart");
     let display=document.querySelector("#display");
-    let btnStop=document.querySelector("#btnStop");
-    let timerID;
+    let stopBtn=document.querySelector("#btnStop");
 
+    let minus= document.querySelector("#btnMinus");
+    let increment= document.querySelector("#btnIncrement");
+
+    let text = document.querySelector("#txt");
+    let interval;
     startBtn.addEventListener("click",function (){
-        //let's set a timer
-        timerID=  setInterval(function(){
-            //should start increment
-            display.innerText=parseInt(display.innerText)+1;
-        },100);
+      
+        clearInterval(interval);
+      
+      if(text.value === ""){
+            interval = setInterval(function () {
+                display.innerText=parseInt(display.innerText)+1;
+            },1000);
+      }else {
+            display.innerText=text.value;
+            interval = setInterval(function () {
+                display.innerText=parseInt(display.innerText)+1;
+                text.value="";
+            },1000);
+        }
     });
-
-
-    btnStop.addEventListener("click",function (){
-        clearInterval(timerID);
-    })
-;
-
-
+    stopBtn.addEventListener("click",function (){
+       clearInterval(interval);
+    });
+    increment.addEventListener("click",function (){
+        display.innerText=parseInt(display.innerText)+1;
+    });
+    minus.addEventListener("click",function (){
+        display.innerText=parseInt(display.innerText)-1;
+    });
 </script>
-
 </body>
 </html>
